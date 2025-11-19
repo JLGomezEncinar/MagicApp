@@ -34,6 +34,7 @@ const TextyTextInput = ({
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: Platform.OS === 'android' ? 'column' : 'row',
     width: '50%',
     marginVertical: 10,
   },
