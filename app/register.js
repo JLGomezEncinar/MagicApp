@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet } from 'react-native';
+import { Link, useRouter } from 'expo-router';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
-
+import MiTopBar from '../components/MiTopBar';
+import MiBoton from '../components/MiBoton';
+const router = useRouter();
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +21,7 @@ const Register = () => {
 
   return (
    <View style={styles.container}>
+<MiTopBar></MiTopBar>
     <View style={styles.box}>
      {/* 📧 Input de Correo */}
        <TextyTextInput 
