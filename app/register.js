@@ -4,6 +4,7 @@ import { Link, useRouter } from 'expo-router';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';
+import MiBox from '../components/MiBox';
 const router = useRouter();
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -20,21 +21,29 @@ const Register = () => {
   };
 
   return (
-   <View style={styles.container}>
-<MiTopBar></MiTopBar>
-    <View style={styles.box}>
-     {/* 📧 Input de Correo */}
-       <TextyTextInput 
-      label="Usuario" 
-      keyboardType="email-address" 
-      value={email} 
-      onChangeText={(text) => { 
-        setEmail(text); 
-        setEmailError(null); // Limpia el error al escribir 
-        }} 
-        error={emailError} // Pasa el mensaje de error para activar el estilo 
-        />
-        {/* 🔑 Input de Contraseña */} 
+    <View style={styles.container}>
+      <MiTopBar></MiTopBar>
+      <MiBox
+        customStyles = {{
+          width: '60%',
+          backgroundColor: '#DCDCF6',
+          elevation: 5
+        }}
+  >
+
+    
+     {/* 📧 Input de Correo */ }
+  <TextyTextInput
+    label="Usuario"
+    keyboardType="email-address"
+    value={email}
+    onChangeText={(text) => {
+      setEmail(text);
+      setEmailError(null); // Limpia el error al escribir 
+    }}
+    error={emailError} // Pasa el mensaje de error para activar el estilo 
+  />
+  {/* 🔑 Input de Contraseña */ } 
         <TextyTextInput 
         label="Contraseña" 
         secureTextEntry={true} // Oculta el texto 
@@ -69,8 +78,8 @@ const Register = () => {
         }} 
         error={emailError} // Pasa el mensaje de error para activar el estilo 
         /> 
-        </View>
-        </View>
+        </MiBox >
+        </View >
 
   );
 };
@@ -79,16 +88,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#643F6F',  
-    justifyContent: 'center',  
+    backgroundColor: '#643F6F',
+    justifyContent: 'center',
     alignItems: 'center'
   },
-  box: {
-    width: '60%',
-    backgroundColor: '#DCDCF6',    
-    alignItems: 'center',
-    elevation: 5
-  }
+
 });
 
 export default Register;

@@ -1,5 +1,4 @@
 import { View, Text, Image, TextInput, Platform, TouchableOpacity, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons"; // debes instalarla
 
 const MiTopBar = () => {
   return (

@@ -3,6 +3,7 @@ import { View, Button, StyleSheet, Text } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiBoton from '../components/MiBoton';
+import MiBox from '../components/MiBox'
 const router = useRouter();
 const Index = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +21,13 @@ const Index = () => {
 
   return (
     <View style={styles.container}>
+      <MiBox
+        customStyles={{
+          width: '60%',
+          backgroundColor: '#DCDCF6',
+          elevation: 5
+        }}
+      >
       {/* 📧 Input de Correo */}
       <TextyTextInput
         label="Usuario"
@@ -44,13 +52,13 @@ const Index = () => {
         backgroundColor="#E41818"
         textColor="#2A1ECF"
         onPress={() => {
-          router.push("/shop"); // Llama a la función de navegación
+          router.push("/prueba"); // Llama a la función de navegación
         }}
       />
       <Text>¿No tienes una cuenta?</Text>
       <Link href="/register">Regístrate</Link>
-
-    </View>
+    </MiBox>
+    </View >
 
   );
 };
