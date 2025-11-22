@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, ActivityIndicator } from 'react-native';
 import { View, Button, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 import MiLink from '../components/MiLink';
 import MiTopBar from '../components/MiTopBar';
 import ImageCard from '../components/ImageCard';
 import MiSafeArea from '../components/MiSafeArea';
+const router = useRouter();
 const Shop = () => {
     const [cards, setCards] = useState([]);
 
@@ -16,6 +18,9 @@ const Shop = () => {
       <MiTopBar 
       linkText= 'CERRAR SESION'
       linkTo ='/'
+      onPress={() => {
+          router.push("/"); // ⬅️ Aquí pasas la ruta
+        }}
       ></MiTopBar>
             <MiSafeArea></MiSafeArea>
             

@@ -1,6 +1,9 @@
 import { View, Image, TextInput, Platform, TouchableOpacity, StyleSheet } from "react-native";
 import MiLink from "./MiLink";
-const MiTopBar = ({ linkText, linkTo }) => {
+import MiTouchable from "./MiTouchable";
+import { useRouter } from "expo-router";
+const router = useRouter()
+const MiTopBar = ({ linkText, linkTo, onPress }) => {
   return (
     <View style={styles.container}>
         <TextInput></TextInput>
@@ -16,14 +19,14 @@ const MiTopBar = ({ linkText, linkTo }) => {
       
 
       {/* Icono derecho */}
-      <TouchableOpacity>
+      <MiTouchable onPress={() => {router.push("/shop")}}>
         <Image 
           source={require("../assets/shop.png")}
           style={styles.icon}
         />
-      </TouchableOpacity>
+      </MiTouchable>
       {Platform.OS === 'android' ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
         <Image
           source={require('../assets/sesion.png')}
           style={styles.icon}
