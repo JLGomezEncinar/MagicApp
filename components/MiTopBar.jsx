@@ -1,6 +1,6 @@
-import { View, Text, Image, TextInput, Platform, TouchableOpacity, StyleSheet } from "react-native";
-
-const MiTopBar = () => {
+import { View, Image, TextInput, Platform, TouchableOpacity, StyleSheet } from "react-native";
+import MiLink from "./MiLink";
+const MiTopBar = ({ linkText, linkTo }) => {
   return (
     <View style={styles.container}>
         <TextInput></TextInput>
@@ -30,7 +30,7 @@ const MiTopBar = () => {
         />
         </TouchableOpacity>
       ) : Platform.OS === 'web' ? (
-        <Text style={styles.webText}>INICIAR SESIÓN</Text>
+        <MiLink to={linkTo}>{linkText}</MiLink>
       ) : null}
 
     </View>

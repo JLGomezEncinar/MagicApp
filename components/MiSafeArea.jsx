@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import {FlatList, ActivityIndicator} from 'react-native';
-import ImageCard from '../components/ImageCard';
+import {FlatList, ActivityIndicator, Platform} from 'react-native';
+import ImageCard from './ImageCard';
 
 
-export default function Prueba() {
+export default function MiSafeArea() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -44,11 +44,12 @@ export default function Prueba() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f4f7' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f4f7'}}>
         <FlatList
           data={cards}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderItem}
+          horizontal={Platform.OS !== 'android'}
         />
       </SafeAreaView>
     </SafeAreaProvider>

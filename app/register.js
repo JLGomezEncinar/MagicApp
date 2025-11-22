@@ -22,7 +22,10 @@ const Register = () => {
 
   return (
     <View style={styles.container}>
-      <MiTopBar></MiTopBar>
+      <MiTopBar 
+      linkText= 'INICIAR SESION'
+      linkTo ='/'
+      ></MiTopBar>
       <MiBox
         customStyles = {{
           width: '60%',
@@ -78,6 +81,15 @@ const Register = () => {
         }} 
         error={emailError} // Pasa el mensaje de error para activar el estilo 
         /> 
+        <MiBoton
+        title="Registrarse"
+        backgroundColor="#BCF0D1"
+        textColor="#512E62"
+        borderRadius = {30}
+        onPress={() => {
+          router.push("/"); // Llama a la función de navegación
+        }}
+      />
         </MiBox >
         </View >
 

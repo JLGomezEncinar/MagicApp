@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, ActivityIndicator } from 'react-native';
 import { View, Button, StyleSheet } from 'react-native';
-import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
+import MiLink from '../components/MiLink';
 import MiTopBar from '../components/MiTopBar';
-import MiBoton from '../components/MiBoton';
+import ImageCard from '../components/ImageCard';
+import MiSafeArea from '../components/MiSafeArea';
 const Shop = () => {
+    const [cards, setCards] = useState([]);
+
     
 
     return (
         <View style={styles.container}>
-            <MiTopBar></MiTopBar>
+      <MiTopBar 
+      linkText= 'CERRAR SESION'
+      linkTo ='/'
+      ></MiTopBar>
+            <MiSafeArea></MiSafeArea>
             
+
         </View>
 
     );
@@ -23,7 +33,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     }
-    
+
 });
 
 export default Shop;

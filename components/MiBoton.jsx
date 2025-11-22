@@ -8,6 +8,7 @@ const MiBoton = ({
   onPress,
   backgroundColor = "#007AFF",
   textColor = "#fff",
+  borderRadius = 0,
   style,
   textStyle
 }) => {
@@ -15,7 +16,7 @@ const MiBoton = ({
     <TouchableOpacity
       style={[
         styles.button,
-        { backgroundColor },
+        { backgroundColor,borderRadius },
         style
       ]}
       onPress={onPress}
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    
     justifyContent: "center",
     alignItems: "center"
   },

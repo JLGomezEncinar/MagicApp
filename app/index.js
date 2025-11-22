@@ -3,7 +3,8 @@ import { View, Button, StyleSheet, Text } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiBoton from '../components/MiBoton';
-import MiBox from '../components/MiBox'
+import MiBox from '../components/MiBox';
+import MiLink from '../components/MiLink';
 const router = useRouter();
 const Index = () => {
   const [email, setEmail] = useState('');
@@ -51,12 +52,13 @@ const Index = () => {
         title="Iniciar Sesión"
         backgroundColor="#E41818"
         textColor="#2A1ECF"
+        
         onPress={() => {
-          router.push("/prueba"); // Llama a la función de navegación
+          router.push("/shop"); // Llama a la función de navegación
         }}
       />
       <Text>¿No tienes una cuenta?</Text>
-      <Link href="/register">Regístrate</Link>
+      <MiLink to="/register">Regístrate</MiLink>
     </MiBox>
     </View >
 
