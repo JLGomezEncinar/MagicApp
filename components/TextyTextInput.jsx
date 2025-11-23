@@ -9,7 +9,8 @@ const TextyTextInput = ({
   // Podemos añadir más props personalizadas o de estilo aquí
   label, // Etiqueta opcional
   error, // Mensaje de error opcional
-  style
+  style,
+  onBlur
 }) => {
   return (
     <View style={styles.container}>
@@ -23,7 +24,7 @@ const TextyTextInput = ({
         onChangeText={onChangeText}        
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
-        
+        onBlur={onBlur}
       />
       
       {/* Mensaje de Error */}
