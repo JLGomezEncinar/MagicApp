@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { View, Button, StyleSheet, Text } from 'react-native';
 import { Link, useRouter } from 'expo-router';
+import { useParams } from '../components/ParamsProvider';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiBoton from '../components/MiBoton';
 import MiBox from '../components/MiBox';
 import MiLink from '../components/MiLink';
-const router = useRouter();
+
+
 const Index = () => {
+  const router = useRouter();
+  const { setParams } = useParams();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState(null);
@@ -45,7 +49,7 @@ const Index = () => {
         {/* 📧 Input de Correo */}
         <TextyTextInput
           label="Usuario"
-          
+
           value={user}
           onChangeText={(user) => {
             setUser(user);
@@ -73,7 +77,9 @@ const Index = () => {
           onPress={() => {
             const isUserValid = handleUser(user);
             const isPasswordValid = handlePassword(password);
-            if ( isUserValid && isPasswordValid) {
+            if (isUserValid && isPasswordValid) {
+              setParams({ user: user });
+
               router.push("/shop"); // Llama a la función de navegación
             }
           }}

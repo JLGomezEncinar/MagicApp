@@ -52,11 +52,12 @@ const Register = () => {
     }
   };
   const handleEmail = (email) => {
-    const emailRegex = /\S+@\S+\.\S+/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (email.trim() === '') {
       setEmailError('El email no puede estar vacío');
       return false;
-    } else if (emailRegex.test(email)) {
+    } else if (!emailRegex.test(email)) {
       setEmailError('Debe introducir un email válido');
       return false;
     } else {
