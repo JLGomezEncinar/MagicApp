@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Button, StyleSheet, Text } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
@@ -9,12 +9,34 @@ import MiLink from '../components/MiLink';
 
 
 const Index = () => {
+
+
+// Iniciar la operación
+
   const router = useRouter();
   const { setParams } = useParams();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const URL = "https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/users.json";
+
+  const [usuarios, setUsuarios] = useState([]);
+
+  useEffect(() => {
+    const cargarDatos = async () => {
+      try {
+        const response = await fetch(URL);
+        const data = await response.json();
+        setUsuarios(data);
+      } catch (error) {
+        console.error("Error cargando JSON:", error);
+      }
+    };
+
+    cargarDatos();
+  }, []);
+
   const handleUser = (user) => {
     if (user.trim() === '') {
       setUserError('El usuario no puede estar vacío');
@@ -78,14 +100,24 @@ const Index = () => {
             const isUserValid = handleUser(user);
             const isPasswordValid = handlePassword(password);
             if (isUserValid && isPasswordValid) {
-              setParams({ user: user });
+              const usuarioValido = usuarios.find(
+                u => u.user === user && u.password === password
+              );
 
-              router.push("/shop"); // Llama a la función de navegación
-            }
+              if (usuarioValido) {
+                setParams({ user: user });
+
+                router.push("/shop"); // Llama a la función de navegación
+              } else {
+                console.log("Error en login");
+                alert("Email o contraseña incorrectos");
+              }
+            };
+
           }}
         />
         <Text>¿No tienes una cuenta?</Text>
-        <MiLink to="/register">Regístrate</MiLink>
+        <MiLink to="/prueba">Regístrate</MiLink>
       </MiBox>
     </View >
 
