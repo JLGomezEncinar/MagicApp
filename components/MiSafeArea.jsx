@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import {FlatList, ActivityIndicator, Platform} from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, ActivityIndicator, Platform } from 'react-native';
 import ImageCard from './ImageCard';
 
 
@@ -8,17 +8,17 @@ export default function MiSafeArea() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await fetch("https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/cards.json");
-      const data = await response.json();
-      setCards(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  fetchData();
-}, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/cards.json");
+        const data = await response.json();
+        setCards(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
 
   const renderItem = ({ item }) => (
@@ -26,7 +26,7 @@ export default function MiSafeArea() {
       image={item.image}
       title={item.title}
       description={item.description}
-      onPress={() => alert('Card seleccionada '+item.title)}
+      onPress={() => alert('Card seleccionada ' + item.title)}
     />
   );
 
@@ -44,7 +44,7 @@ export default function MiSafeArea() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f4f7'}}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f4f7', paddingTop: 160}}>
         <FlatList
           data={cards}
           keyExtractor={(item) => item.id.toString()}

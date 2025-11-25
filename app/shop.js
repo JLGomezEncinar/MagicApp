@@ -26,8 +26,9 @@ const Shop = () => {
                     router.push("/"); // ⬅️ Aquí pasas la ruta
                 }}
             ></MiTopBar>
-            <MiSafeArea></MiSafeArea>
-
+            <View style={styles.content}>
+                <MiSafeArea></MiSafeArea>
+            </View>
 
         </View>
 
@@ -39,8 +40,9 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#643F6F',
-        justifyContent: 'center',
-        alignItems: 'center'
+    },
+    content: {
+        flex: 1,
     }
 
 });

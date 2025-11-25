@@ -11,9 +11,14 @@ export default function ImageCard({ image, title, description, onPress }) {
       ]}
     >
       <Image source={{ uri: image }} style={styles.image} />
+
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
-        {description ? <Text style={styles.desc}>{description}</Text> : null}
+
+        <Image
+          source={require("../assets/add.png")}
+          style={styles.icon}
+        />
       </View>
     </Pressable>
   );
@@ -21,10 +26,12 @@ export default function ImageCard({ image, title, description, onPress }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
+    height: 250,
+    width: 260,           // ⭐ Ajusta el tamaño como quieras
+    backgroundColor: '#C4D9E7',
     borderRadius: 12,
-    marginVertical: 10,
-    marginHorizontal: 16,
+    marginHorizontal: 12,
+    marginVertical: 20,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOpacity: 0.15,
@@ -38,15 +45,18 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   title: {
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 6,
   },
-  desc: {
-    fontSize: 14,
-    color: '#666',
+  icon: {
+    width: 28,
+    height: 28,
   },
 });
+
