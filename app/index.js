@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, StyleSheet, Text } from 'react-native';
+import { View, Button, StyleSheet, Text, ImageBackground, Platform } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
@@ -11,7 +11,7 @@ import MiLink from '../components/MiLink';
 const Index = () => {
 
 
-// Iniciar la operación
+  // Iniciar la operación
 
   const router = useRouter();
   const { setParams } = useParams();
@@ -60,11 +60,16 @@ const Index = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require("../assets/fondoIndex.jpg")}
+      style={styles.background}
+      resizeMode='cover'
+    >
+
       <MiBox
         customStyles={{
           width: '60%',
-          backgroundColor: '#DCDCF6',
+          backgroundColor: '#C5A3FF',
           elevation: 5
         }}
       >
@@ -116,20 +121,33 @@ const Index = () => {
 
           }}
         />
-        <Text>¿No tienes una cuenta?</Text>
-        <MiLink to="/prueba">Regístrate</MiLink>
+        <View style={{
+          flexDirection: Platform.OS === "android" ? "column" : "row",
+
+        }}>
+
+          <Text>¿No tienes una cuenta?</Text>
+          <MiLink to="/prueba">      Regístrate</MiLink>
+        </View>
       </MiBox>
-    </View >
+    </ImageBackground >
 
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  container: {
     padding: 20,
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center'
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   errorText: {
     color: 'red',

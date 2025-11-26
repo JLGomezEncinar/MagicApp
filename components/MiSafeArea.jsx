@@ -26,6 +26,7 @@ export default function MiSafeArea() {
       image={item.image}
       title={item.title}
       description={item.description}
+      backgroundColor={item.backgroundColor}
       onPress={() => alert('Card seleccionada ' + item.title)}
     />
   );
@@ -44,7 +45,7 @@ export default function MiSafeArea() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#f2f4f7', paddingTop: 160}}>
+      <SafeAreaView style={{ flex: 1, paddingTop: 160}}>
         <FlatList
           data={cards}
           keyExtractor={(item) => item.id.toString()}

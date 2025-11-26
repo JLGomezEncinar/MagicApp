@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 
-export default function ImageCard({ image, title, description, onPress }) {
+export default function ImageCard({ image, title, description, backgroundColor,onPress }) {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         styles.card,
+        { backgroundColor: backgroundColor },
         pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
       ]}
     >
