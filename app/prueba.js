@@ -8,7 +8,7 @@ import MiBox from '../components/MiBox';
 import { Buffer } from 'buffer'; // Necesario para Base64 en React Native
 
 // ⚠️ SOLO PARA PRUEBAS, NO EN PRODUCCIÓN
-const GITHUB_TOKEN = "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";
+const GITHUB_TOKEN = "Tu Token";
 const OWNER = "JLGomezEncinar";
 const REPO = "FicheroJSON";
 const FILE_PATH = "users.json";
