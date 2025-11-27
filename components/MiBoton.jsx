@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 // ... en tu componente
 const router = useRouter();
@@ -38,8 +38,9 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   text: {
-    fontSize: 16,
+    fontSize: Platform.OS == 'android' ? 18:24,
     fontWeight: "bold",
+    fontFamily: "MiFuente"
   }
 });
 

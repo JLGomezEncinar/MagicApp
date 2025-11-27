@@ -1,27 +1,52 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, Pressable, Alert, Platform } from 'react-native';
 
-export default function ImageCard({ image, title, description, backgroundColor,onPress }) {
+export default function ImageCard({ image, title, description, backgroundColor, onPress }) {
   return (
-    <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [
-        styles.card,
-        { backgroundColor: backgroundColor },
-        pressed && { opacity: 0.9, transform: [{ scale: 0.98 }] },
-      ]}
-    >
+    <View style={[styles.card, { backgroundColor }]}>
+
       <Image source={{ uri: image }} style={styles.image} />
 
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
+        <Pressable
+          onPress={() => {
+            const message = `Vas a añadir un ${title} a tu carrito`;
 
-        <Image
-          source={require("../assets/add.png")}
-          style={styles.icon}
-        />
+            if (Platform.OS === 'web') {
+              const confirmacion = window.confirm(message);
+              if (confirmacion) {
+                console.log("Producto añadido:", title);
+              }
+            } else {
+              Alert.alert(
+                "Confirmación",
+                message,
+                [
+                  {
+                    text: "Cancelar",
+                    style: "cancel",
+                  },
+                  {
+                    text: "Aceptar",
+                    onPress: () => console.log("Producto añadido:", title),
+                  },
+                ],
+                { cancelable: true }
+              );
+            }
+          }
+          }
+
+        >
+          <Image
+            source={require("../assets/add.png")}
+            style={styles.icon}
+
+          />
+        </Pressable>
       </View>
-    </Pressable>
+    </View>
   );
 }
 

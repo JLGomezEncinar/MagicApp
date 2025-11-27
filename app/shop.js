@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, ActivityIndicator } from 'react-native';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
 import MiLink from '../components/MiLink';
@@ -14,6 +14,7 @@ const Shop = () => {
 
     const { params } = useParams();
     const [cards, setCards] = useState([]);
+    
 
 
 

@@ -64,6 +64,7 @@ const Index = () => {
       source={require("../assets/fondoIndex.jpg")}
       style={styles.background}
       resizeMode='cover'
+      
     >
 
       <MiBox
@@ -71,6 +72,7 @@ const Index = () => {
           width: '60%',
           backgroundColor: '#C5A3FF',
           elevation: 5
+          
         }}
       >
         {/* 📧 Input de Correo */}
@@ -115,7 +117,7 @@ const Index = () => {
                 router.push("/shop"); // Llama a la función de navegación
               } else {
                 console.log("Error en login");
-                alert("Email o contraseña incorrectos");
+                alert("Usuario y/o contraseña incorrectos");
               }
             };
 
@@ -126,7 +128,7 @@ const Index = () => {
 
         }}>
 
-          <Text>¿No tienes una cuenta?</Text>
+          <Text style={styles.text}>¿No tienes una cuenta?</Text>
           <MiLink to="/register">      Regístrate</MiLink>
         </View>
       </MiBox>
@@ -149,6 +151,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+text:{
+  fontSize: Platform.OS == 'android' ? 18:24,
+  fontFamily: "MiFuente",
+} ,
+
   errorText: {
     color: 'red',
     fontSize: 12,

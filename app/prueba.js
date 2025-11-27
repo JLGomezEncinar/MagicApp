@@ -241,8 +241,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#643F6F',
-    justifyContent: 'center',
-    alignItems: 'center'
+    
   },
   box: {
     width: '60%',

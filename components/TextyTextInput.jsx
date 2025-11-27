@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   label: {
-    fontSize: Platform.OS === 'android' ? 16 : 24,
+    fontSize: Platform.OS === 'android' ? 18 : 24,
     marginBottom: 5,
     fontWeight: 'bold',
     color: '#333',
-    fontFamily : 'Beleren_Bold',
+    fontFamily : 'MiFuente',
   },
   input: {
     height: 50,

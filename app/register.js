@@ -181,10 +181,10 @@ const Register = () => {
 
   return (
     <ImageBackground
-          source={require("../assets/fondoRegister.jpg")}
-          style={styles.background}
-          resizeMode='cover'
-        >
+      source={require("../assets/fondoRegister.jpg")}
+      style={styles.background}
+      resizeMode='cover'
+    >
       <MiTopBar
         linkText='INICIAR SESION'
         linkTo='/'
@@ -192,87 +192,91 @@ const Register = () => {
           router.push("/"); // ⬅️ Aquí pasas la ruta
         }}
       ></MiTopBar>
-      <MiBox
-        customStyles={{
-          width: '60%',
-          backgroundColor: '#DCDCF6',
-          elevation: 5
-        }}
-      >
+      <View style={styles.container}>
+        <MiBox
+          customStyles={{
+
+            width: '60%',
+            backgroundColor: '#DCDCF6',
+            elevation: 5,
+
+          }}
+        >
 
 
-        {/* 📧 Input de Correo */}
-        <TextyTextInput
-          label="Usuario"
-          value={user}
-          onChangeText={(user) => {
-            setUser(user);
-            handleUser(user); // Limpia el error al escribir 
-          }}
-        />
-        {userError ? <Text style={styles.errorText}>{userError}</Text> : null}
-        {/* 🔑 Input de Contraseña */}
-        <TextyTextInput
-          label="Contraseña"
-          secureTextEntry={true} // Oculta el texto 
-          value={password}
-          onChangeText={(password) => {
-            setPassword(password);
-            handlePassword(password); // Limpia el error al escribir 
-          }}
-        />
-        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
-        <TextyTextInput
-          label="Repetir contraseña"
-          secureTextEntry={true} // Oculta el texto 
-          value={repeatPassword}
-          onChangeText={(repeatPassword) => {
-            setRepeatPassword(repeatPassword);
-            handleRepeatPassword(repeatPassword); // Limpia el error al escribir 
-          }}
+          {/* 📧 Input de Correo */}
+          <TextyTextInput
+            label="Usuario"
+            value={user}
+            onChangeText={(user) => {
+              setUser(user);
+              handleUser(user); // Limpia el error al escribir 
+            }}
+          />
+          {userError ? <Text style={styles.errorText}>{userError}</Text> : null}
+          {/* 🔑 Input de Contraseña */}
+          <TextyTextInput
+            label="Contraseña"
+            secureTextEntry={true} // Oculta el texto 
+            value={password}
+            onChangeText={(password) => {
+              setPassword(password);
+              handlePassword(password); // Limpia el error al escribir 
+            }}
+          />
+          {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
+          <TextyTextInput
+            label="Repetir contraseña"
+            secureTextEntry={true} // Oculta el texto 
+            value={repeatPassword}
+            onChangeText={(repeatPassword) => {
+              setRepeatPassword(repeatPassword);
+              handleRepeatPassword(repeatPassword); // Limpia el error al escribir 
+            }}
 
-        />
-        {repeatPasswordError ? <Text style={styles.errorText}>{repeatPasswordError}</Text> : null}
-        <TextyTextInput
-          label="Email"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={(email) => {
-            setEmail(email);
-            handleEmail(email);
-          }}
+          />
+          {repeatPasswordError ? <Text style={styles.errorText}>{repeatPasswordError}</Text> : null}
+          <TextyTextInput
+            label="Email"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={(email) => {
+              setEmail(email);
+              handleEmail(email);
+            }}
 
-        />
-        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
-        <TextyTextInput
-          label="Repetir email"
-          keyboardType="email-address"
-          value={repeatEmail}
-          onChangeText={(repeatEmail) => {
-            setRepeatEmail(repeatEmail);
-            handleRepeatEmail(repeatEmail);
-          }}
+          />
+          {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+          <TextyTextInput
+            label="Repetir email"
+            keyboardType="email-address"
+            value={repeatEmail}
+            onChangeText={(repeatEmail) => {
+              setRepeatEmail(repeatEmail);
+              handleRepeatEmail(repeatEmail);
+            }}
 
-        />
-        {repeatEmailError ? <Text style={styles.errorText}>{repeatEmailError}</Text> : null}
-        <MiBoton
-          title="Registrarse"
-          backgroundColor="#BCF0D1"
-          textColor="#512E62"
-          borderRadius={30}
-          onPress={() => {
-            const isUserValid = handleUser(user);
-            const isPasswordValid = handlePassword(password);
-            const isRepeatPasswordValid = handleRepeatPassword(repeatPassword);
-            const isEmailValid = handleEmail(email);
-            const isRepeatEmailValid = handleRepeatEmail(repeatEmail);
-            if (isUserValid && isPasswordValid && isRepeatPasswordValid && isEmailValid && isRepeatEmailValid) {
-              updateGitHubFile();
-              router.push("/"); // Llama a la función de navegación
-            }
-          }}
-        />
-      </MiBox >
+          />
+          {repeatEmailError ? <Text style={styles.errorText}>{repeatEmailError}</Text> : null}
+          <MiBoton
+            title="Registrarse"
+            backgroundColor="#BCF0D1"
+            textColor="#512E62"
+            borderRadius={30}
+            onPress={() => {
+              const isUserValid = handleUser(user);
+              const isPasswordValid = handlePassword(password);
+              const isRepeatPasswordValid = handleRepeatPassword(repeatPassword);
+              const isEmailValid = handleEmail(email);
+              const isRepeatEmailValid = handleRepeatEmail(repeatEmail);
+              if (isUserValid && isPasswordValid && isRepeatPasswordValid && isEmailValid && isRepeatEmailValid) {
+                updateGitHubFile();
+                router.push("/"); // Llama a la función de navegación
+              }
+            }}
+          />
+        </MiBox >
+      </View>
     </ImageBackground >
 
   );
@@ -281,13 +285,11 @@ const Register = () => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     height: '100%',
     width: '100%',
   },
   container: {
-   
+    flex: 1,
     padding: 20,
     backgroundColor: '#643F6F',
     justifyContent: 'center',

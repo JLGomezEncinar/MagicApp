@@ -1,5 +1,5 @@
 import { Link } from "expo-router";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 
 export default function MiLink({ to, children, style }) {
   return (
@@ -12,7 +12,7 @@ export default function MiLink({ to, children, style }) {
 const styles = StyleSheet.create({
   text: {
     color: "blue",
-    fontSize: 18,
-    fontFamily: "Beleren Bold",
+    fontSize: Platform.OS == 'android' ? 18 : 24,
+    fontFamily: "MiFuente",
   }
 });
