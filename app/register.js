@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiTopBar from '../components/MiTopBar';
@@ -180,7 +180,11 @@ const Register = () => {
 
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+          source={require("../assets/fondoRegister.jpg")}
+          style={styles.background}
+          resizeMode='cover'
+        >
       <MiTopBar
         linkText='INICIAR SESION'
         linkTo='/'
@@ -269,14 +273,21 @@ const Register = () => {
           }}
         />
       </MiBox >
-    </View >
+    </ImageBackground >
 
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  container: {
+   
     padding: 20,
     backgroundColor: '#643F6F',
     justifyContent: 'center',

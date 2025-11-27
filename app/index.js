@@ -127,7 +127,7 @@ const Index = () => {
         }}>
 
           <Text>¿No tienes una cuenta?</Text>
-          <MiLink to="/prueba">      Regístrate</MiLink>
+          <MiLink to="/register">      Regístrate</MiLink>
         </View>
       </MiBox>
     </ImageBackground >
