@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList, ActivityIndicator, Platform } from 'react-native';
+import { FlatList, ActivityIndicator, Platform, Text } from 'react-native';
 import ImageCard from './ImageCard';
 
-
-export default function MiSafeArea() {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/cards.json");
-        const data = await response.json();
-        setCards(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
-
+export default function MiSafeArea({ cards }) {
 
   const renderItem = ({ item }) => (
     <ImageCard
@@ -31,7 +15,7 @@ export default function MiSafeArea() {
     />
   );
 
-  if (cards.length === 0) {
+  if (!cards) {
     return (
       <SafeAreaProvider>
         <SafeAreaView
@@ -42,10 +26,19 @@ export default function MiSafeArea() {
       </SafeAreaProvider>
     );
   }
+   if (cards.length === 0) {
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: 20, color: '#ff00ff' }}>No hay resultados </Text>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
+  }
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, paddingTop: 160}}>
+      <SafeAreaView style={{ flex: 1, paddingTop: 160 }}>
         <FlatList
           data={cards}
           keyExtractor={(item) => item.id.toString()}

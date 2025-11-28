@@ -1,10 +1,12 @@
 import {View} from "react-native"
 import {Slot} from "expo-router"
 import { ParamsProvider } from "../components/ParamsProvider";
+import { CartProvider } from "../components/CartContext";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -34,9 +36,11 @@ export default function Layout() {
 
     return (
         <View style={{ flex: 1}}>
+          <CartProvider>
             <ParamsProvider>
            <Slot />
            </ParamsProvider>
+           </CartProvider>
         </View>
 
     );

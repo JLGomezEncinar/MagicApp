@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable, Alert, Platform } from 'react-native';
+import { useCart } from "../components/CartContext";
+const { addToCart } = useCart();
 
 export default function ImageCard({ image, title, description, backgroundColor, onPress }) {
   return (
@@ -16,7 +18,7 @@ export default function ImageCard({ image, title, description, backgroundColor, 
             if (Platform.OS === 'web') {
               const confirmacion = window.confirm(message);
               if (confirmacion) {
-                console.log("Producto añadido:", title);
+                addToCart(title)
               }
             } else {
               Alert.alert(
@@ -29,7 +31,7 @@ export default function ImageCard({ image, title, description, backgroundColor, 
                   },
                   {
                     text: "Aceptar",
-                    onPress: () => console.log("Producto añadido:", title),
+                    onPress: () => addToCart(title)
                   },
                 ],
                 { cancelable: true }

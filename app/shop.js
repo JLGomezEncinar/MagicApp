@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, ActivityIndicator } from 'react-native';
-import { View, Button, StyleSheet, Alert } from 'react-native';
+import { View, Button, StyleSheet, Alert, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
 import MiLink from '../components/MiLink';
@@ -11,41 +11,61 @@ import MiSafeArea from '../components/MiSafeArea';
 
 const Shop = () => {
     const router = useRouter();
-
     const { params } = useParams();
-    const [cards, setCards] = useState([]);
-    
 
+    const [data, setData] = useState([]);
+    const [filtered, setFiltered] = useState([]);
 
+    // cargar JSON solo una vez
+    useEffect(() => {
+        fetch("https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/cards.json")
+            .then(res => res.json())
+            .then(json => {
+                setData(json);
+                setFiltered(json);
+            })
+            .catch(err => console.log("ERROR:", err));
+    }, []);
+
+    // función que MiTopBar llamará
+    const buscar = (texto) => {
+        const t = texto.toLowerCase();
+        const f = data.filter(item =>
+            item.title.toLowerCase().includes(t)
+        );
+        setFiltered(f);
+    };
 
     return (
-        <View style={styles.container}>
+        <ImageBackground
+            source={require("../assets/fondoRegister.jpg")}
+            style={styles.background}
+        >
             <MiTopBar
                 linkText={`CERRAR SESION ${params.user}`}
-                linkTo='/'
-                onPress={() => {
-                    router.push("/"); // ⬅️ Aquí pasas la ruta
-                }}
-            ></MiTopBar>
+                linkTo="/"
+                onPress={() => router.push("/")}
+                onSearch={buscar}   // ⬅️ SHOP recibe búsqueda aquí
+            />
+
             <View style={styles.content}>
-                <MiSafeArea></MiSafeArea>
+                <MiSafeArea cards={filtered} />   {/* ⬅️ Shop controla qué mostrar */}
             </View>
 
-        </View>
-
+        </ImageBackground>
     );
 };
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#643F6F',
-    },
-    content: {
-        flex: 1,
-    }
-
-});
+ background: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  content: {
+    flex: 1
+  }
+})
 
 export default Shop;

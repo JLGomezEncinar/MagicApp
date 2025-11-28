@@ -180,10 +180,9 @@ const Register = () => {
 
 
   return (
-    <ImageBackground
-      source={require("../assets/fondoRegister.jpg")}
+    <View
       style={styles.background}
-      resizeMode='cover'
+      
     >
       <MiTopBar
         linkText='INICIAR SESION'
@@ -277,7 +276,7 @@ const Register = () => {
           />
         </MiBox >
       </View>
-    </ImageBackground >
+    </View>
 
   );
 };
