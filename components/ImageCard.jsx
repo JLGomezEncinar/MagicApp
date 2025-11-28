@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable, Alert, Platform } from 'react-native';
 import { useCart } from "../components/CartContext";
-const { addToCart } = useCart();
+
 
 export default function ImageCard({ image, title, description, backgroundColor, onPress }) {
+  const { addToCart } = useCart();
   return (
     <View style={[styles.card, { backgroundColor }]}>
 
