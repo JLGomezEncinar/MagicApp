@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, ActivityIndicator } from 'react-native';
 import { View, Button, StyleSheet, Alert, ImageBackground } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
 import MiLink from '../components/MiLink';
 import MiTopBar from '../components/MiTopBar';
@@ -10,11 +10,26 @@ import ImageCard from '../components/ImageCard';
 import MiSafeArea from '../components/MiSafeArea';
 
 const Shop = () => {
+    const { q } = useLocalSearchParams();
     const router = useRouter();
     const { params } = useParams();
 
     const [data, setData] = useState([]);
     const [filtered, setFiltered] = useState([]);
+    const buscar = (texto) => {
+        const t = texto.toLowerCase();
+        const f = data.filter(item =>
+            item.title.toLowerCase().includes(t)
+        );
+        setFiltered(f);
+    };
+
+    useEffect(() => {
+        if (q && data.length > 0) {
+            buscar(q);
+        }
+    }, [q, data]);
+    
 
     // cargar JSON solo una vez
     useEffect(() => {
@@ -28,13 +43,7 @@ const Shop = () => {
     }, []);
 
     // función que MiTopBar llamará
-    const buscar = (texto) => {
-        const t = texto.toLowerCase();
-        const f = data.filter(item =>
-            item.title.toLowerCase().includes(t)
-        );
-        setFiltered(f);
-    };
+
 
     return (
         <ImageBackground
@@ -56,16 +65,16 @@ const Shop = () => {
     );
 };
 const styles = StyleSheet.create({
- background: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
-  },
-  content: {
-    flex: 1
-  }
+    background: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%',
+    },
+    content: {
+        flex: 1
+    }
 })
 
 export default Shop;

@@ -1,7 +1,7 @@
 import { View, Image, TextInput, Platform, TouchableOpacity, StyleSheet, Modal, Text, Button } from "react-native";
 import MiLink from "./MiLink";
 import MiTouchable from "./MiTouchable";
-import { useRouter } from "expo-router";
+import { useRouter,usePathname } from "expo-router";
 import { useState, useEffect } from "react";
 import { useCart } from "../components/CartContext";
 
@@ -10,7 +10,8 @@ import { useCart } from "../components/CartContext";
 const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const { cart } = useCart();
 
@@ -27,8 +28,21 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
 
 
       {/* Icono izquierdo */}
-      <TouchableOpacity
-        onPress={buscar}>
+     <TouchableOpacity
+  onPress={() => {
+    // Navegar a /shop si NO estamos ya en /shop
+    if (pathname !== "/shop") {
+      router.push({
+        pathname: "/shop",
+        params: { q: text }
+      });
+    } else {
+
+    // Ejecutar la búsqueda
+    onSearch(text)
+    }
+  }}
+>
         <Image
           source={require("../assets/search.png")}
           style={styles.icon}
