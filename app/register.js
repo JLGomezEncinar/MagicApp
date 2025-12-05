@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useParams } from '../components/ParamsProvider';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';
@@ -8,6 +9,7 @@ import MiBox from '../components/MiBox';
 
 const Register = () => {
   const router = useRouter();
+  const { params } = useParams();
   // --- CONFIGURACIÓN (Remplaza con tus datos) ---
   const GITHUB_TOKEN = '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'; // ¡Cuidado, NO lo subas a GitHub!
   const OWNER = 'JLGomezEncinar'; // Tu nombre de usuario de GitHub

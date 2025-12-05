@@ -19,6 +19,7 @@ const Index = () => {
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [isLogged, setIsLogged] = useState (false);
   const URL = "https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/users.json";
 
   const [usuarios, setUsuarios] = useState([]);
@@ -112,7 +113,7 @@ const Index = () => {
               );
 
               if (usuarioValido) {
-                setParams({ user: user });
+                setParams({ user: user, isLogged: true });
 
                 router.push("/shop"); // Llama a la función de navegación
               } else {
@@ -129,7 +130,7 @@ const Index = () => {
         }}>
 
           <Text style={styles.text}>¿No tienes una cuenta?</Text>
-          <MiLink to="/register">      Regístrate</MiLink>
+          <MiLink to="/register" >      Regístrate</MiLink>
         </View>
       </MiBox>
     </ImageBackground >

@@ -10,7 +10,7 @@ import ImageCard from '../components/ImageCard';
 import MiSafeArea from '../components/MiSafeArea';
 
 const Shop = () => {
-    const { q } = useLocalSearchParams();
+   
     const router = useRouter();
     const { params } = useParams();
 
@@ -25,10 +25,10 @@ const Shop = () => {
     };
 
     useEffect(() => {
-        if (q && data.length > 0) {
-            buscar(q);
+        if (params.text && data.length > 0) {
+            buscar(params.text);
         }
-    }, [q, data]);
+    }, [params.text, data]);
     
 
     // cargar JSON solo una vez
@@ -51,7 +51,9 @@ const Shop = () => {
             style={styles.background}
         >
             <MiTopBar
-                linkText={`CERRAR SESION ${params.user}`}
+           linkText={params.isLogged ? `CERRAR SESIÓN ${params.user}` : "INICIAR SESIÓN"}
+            
+            
                 linkTo="/"
                 onPress={() => router.push("/")}
                 onSearch={buscar}   // ⬅️ SHOP recibe búsqueda aquí

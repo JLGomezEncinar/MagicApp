@@ -3,6 +3,7 @@ import MiLink from "./MiLink";
 import MiTouchable from "./MiTouchable";
 import { useRouter,usePathname } from "expo-router";
 import { useState, useEffect } from "react";
+import { useParams } from '../components/ParamsProvider';
 import { useCart } from "../components/CartContext";
 
 
@@ -10,6 +11,8 @@ import { useCart } from "../components/CartContext";
 const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const { setParams } = useParams();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -34,7 +37,7 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
     if (pathname !== "/shop") {
       router.push({
         pathname: "/shop",
-        params: { q: text }
+        params: { text: text, isLogged: false }
       });
     } else {
 
