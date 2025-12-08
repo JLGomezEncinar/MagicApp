@@ -1,8 +1,9 @@
 import { View, Image, TextInput, Platform, TouchableOpacity, StyleSheet, Modal, Text, Button } from "react-native";
 import MiLink from "./MiLink";
 import MiTouchable from "./MiTouchable";
-import { useRouter } from "expo-router";
+import { useRouter,usePathname } from "expo-router";
 import { useState, useEffect } from "react";
+import { useParams } from '../components/ParamsProvider';
 import { useCart } from "../components/CartContext";
 
 
@@ -10,7 +11,10 @@ import { useCart } from "../components/CartContext";
 const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { } }) => {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
-  const router = useRouter()
+  const [isLogged, setIsLogged] = useState(false);
+  const { setParams } = useParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const { cart } = useCart();
 

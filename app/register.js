@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useParams } from '../components/ParamsProvider';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';

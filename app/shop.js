@@ -11,6 +11,7 @@ import MiSafeArea from '../components/MiSafeArea';
 import { setParams } from 'expo-router/build/global-state/routing';
 
 const Shop = () => {
+   
     const router = useRouter();
     const { params, setParams } = useParams();
     const localParams = useLocalSearchParams();
@@ -49,13 +50,7 @@ const Shop = () => {
     }, [data, localParams, params]);
 
     // función que MiTopBar llamará
-    const buscar = (texto) => {
-        const t = texto.toLowerCase();
-        const f = data.filter(item =>
-            item.title.toLowerCase().includes(t)
-        );
-        setFiltered(f);
-    };
+
 
     return (
         <ImageBackground
@@ -88,6 +83,16 @@ const Shop = () => {
     );
 };
 const styles = StyleSheet.create({
+    background: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%',
+    },
+    content: {
+        flex: 1
+    }
     background: {
         flex: 1,
         alignItems: 'center',
