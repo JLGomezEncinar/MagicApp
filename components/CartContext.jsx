@@ -4,8 +4,7 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState({}); 
-  // Ejemplo de estructura:
-  // { "manzana": 2, "banana": 1 }
+  
 
   const addToCart = (title) => {
     setCart(prev => ({

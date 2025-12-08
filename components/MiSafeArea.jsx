@@ -21,7 +21,7 @@ export default function MiSafeArea({ cards }) {
         <SafeAreaView
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
         >
-          <ActivityIndicator size="large" color="#007bff" />
+          <ActivityIndicator testID="loading-indicator" size="large" color="#007bff" />
         </SafeAreaView>
       </SafeAreaProvider>
     );

@@ -5,9 +5,30 @@ import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';
 import MiBox from '../components/MiBox';
+import { useParams } from '../components/ParamsProvider';
 
 const Register = () => {
   const router = useRouter();
+  const { params } = useParams();
+  const { setParams } = useParams();
+  const handleSearchAndNavigate = (searchText) => {
+    // 1. Navega a la pantalla de la tienda ('/shop')
+    // Usamos el hook de router de Expo
+
+    // 2. Incluimos el texto de búsqueda como parámetro de consulta (query parameter)
+    router.push({
+      pathname: '/shop', // Cambia esto por la ruta real de tu tienda
+      params: ({
+        query: searchText
+      })
+    });
+
+    // La pantalla Shop debe leer este parámetro 'query' en su useEffect o useLayoutEffect
+    // para ejecutar la búsqueda.
+
+    console.log(`Navegando a /shop con búsqueda: ${searchText}`);
+  };
+
   // --- CONFIGURACIÓN (Remplaza con tus datos) ---
   const GITHUB_TOKEN = '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'; // ¡Cuidado, NO lo subas a GitHub!
   const OWNER = 'JLGomezEncinar'; // Tu nombre de usuario de GitHub
@@ -32,6 +53,7 @@ const Register = () => {
       password: password // Recordatorio: ¡Solo para pruebas!
     }
   ];
+
 
   // -----------------------------------------------------------
 
@@ -182,7 +204,7 @@ const Register = () => {
   return (
     <View
       style={styles.background}
-      
+
     >
       <MiTopBar
         linkText='INICIAR SESION'
@@ -190,6 +212,7 @@ const Register = () => {
         onPress={() => {
           router.push("/"); // ⬅️ Aquí pasas la ruta
         }}
+        onSearch={handleSearchAndNavigate}
       ></MiTopBar>
       <View style={styles.container}>
         <MiBox

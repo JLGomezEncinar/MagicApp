@@ -7,7 +7,7 @@ import { useCart } from "../components/CartContext";
 
 
 
-const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
+const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { } }) => {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
   const router = useRouter()
@@ -22,13 +22,17 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
       <TextInput
         value={text}
         onChangeText={setText}
+        testID="search-input"
+        style={styles.textInput}
+
       />
 
 
 
       {/* Icono izquierdo */}
       <TouchableOpacity
-        onPress={buscar}>
+        onPress={buscar}
+        testID="search-button">
         <Image
           source={require("../assets/search.png")}
           style={styles.icon}
@@ -66,7 +70,9 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch }) => {
           />
         </TouchableOpacity>
       ) : Platform.OS === 'web' ? (
-        <MiLink to={linkTo}>{linkText}</MiLink>
+        <MiLink to="/" onPress={onPress}>
+          {linkText}
+        </MiLink>
       ) : null}
 
     </View>
@@ -94,6 +100,10 @@ const styles = StyleSheet.create({
     height: 28,
     resizeMode: "contain",
   },
+  textInput: {
+    backgroundColor: "#ffffff",
+    width: "20%"
+  }
 });
 
 export default MiTopBar;

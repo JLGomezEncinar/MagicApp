@@ -25,6 +25,7 @@ const TextyTextInput = ({
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
+        testID="input"
       />
       
       {/* Mensaje de Error */}
