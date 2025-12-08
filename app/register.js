@@ -6,7 +6,7 @@ import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';
 import MiBox from '../components/MiBox';
-import { useParams } from '../components/ParamsProvider';
+
 
 const Register = () => {
   const router = useRouter();
