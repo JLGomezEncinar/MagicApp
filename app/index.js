@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, StyleSheet, Text, ImageBackground, Platform } from 'react-native';
+import { View, Button, StyleSheet, Text, ImageBackground, Platform, useWindowDimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
 import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo componente!
@@ -19,10 +20,11 @@ const Index = () => {
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
-  const [isLogged, setIsLogged] = useState (false);
+  const [isLogged, setIsLogged] = useState(false);
   const URL = "https://raw.githubusercontent.com/JLGomezEncinar/FicheroJSON/refs/heads/main/users.json";
 
   const [usuarios, setUsuarios] = useState([]);
+  const { height } = useWindowDimensions();
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -61,79 +63,86 @@ const Index = () => {
   };
 
   return (
-    <ImageBackground
-      source={require("../assets/fondoIndex.jpg")}
-      style={styles.background}
-      resizeMode='cover'
-      
-    >
+    <SafeAreaView style={{ flex: 1 }}>
+      <ImageBackground
+        source={require("../assets/fondoIndex.jpg")}
+        style={styles.background}
+        resizeMode='cover'
 
-      <MiBox
-        customStyles={{
-          width: '60%',
-          backgroundColor: '#C5A3FF',
-          elevation: 5
-          
-        }}
       >
-        {/* 📧 Input de Correo */}
-        <TextyTextInput
-          label="Usuario"
 
-          value={user}
-          onChangeText={(user) => {
-            setUser(user);
-            handleUser(user); // Limpia el error al escribir 
-          }}
-        />
-        {userError ? <Text style={styles.errorText}>{userError}</Text> : null}
-        {/* 🔑 Input de Contraseña */}
-        <TextyTextInput
-          label="Contraseña"
-          secureTextEntry={true} // Oculta el texto 
-          value={password}
-          onChangeText={(password) => {
-            setPassword(password);
-            handlePassword(password); // Limpia el error al escribir 
-          }}
-        //onBlur = {handlePassword}
-        />
-        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
-        <MiBoton
-          title="Iniciar Sesión"
-          backgroundColor="#E41818"
-          textColor="#2A1ECF"
+        <MiBox
+          customStyles={{
+            width: Platform.OS === 'web' ? '60%' : '70%',
+            backgroundColor: '#C5A3FF',
+            elevation: 5,
+            opacity: 0.8,
+            minHeight: Platform.OS === 'web' ? 400 : height * 0.5,
+            gap: 16
 
-          onPress={() => {
-            const isUserValid = handleUser(user);
-            const isPasswordValid = handlePassword(password);
-            if (isUserValid && isPasswordValid) {
-              const usuarioValido = usuarios.find(
-                u => u.user === user && u.password === password
-              );
-
-              if (usuarioValido) {
-                setParams({ user: user, isLogged: true });
-
-                router.push("/shop"); // Llama a la función de navegación
-              } else {
-                console.log("Error en login");
-                alert("Usuario y/o contraseña incorrectos");
-              }
-            };
 
           }}
-        />
-        <View style={{
-          flexDirection: Platform.OS === "android" ? "column" : "row",
+        >
+          {/* 📧 Input de Correo */}
+          <TextyTextInput
+            label="Usuario"
 
-        }}>
+            value={user}
+            onChangeText={(user) => {
+              setUser(user);
+              handleUser(user); // Limpia el error al escribir 
+            }}
+          />
+          {userError ? <Text style={styles.errorText}>{userError}</Text> : null}
+          {/* 🔑 Input de Contraseña */}
+          <TextyTextInput
+            label="Contraseña"
+            secureTextEntry={true} // Oculta el texto 
+            value={password}
+            onChangeText={(password) => {
+              setPassword(password);
+              handlePassword(password); // Limpia el error al escribir 
+            }}
+          //onBlur = {handlePassword}
+          />
+          {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
+          <MiBoton
+            title="Iniciar Sesión"
+            backgroundColor="#E41818"
+            textColor="#2A1ECF"
 
-          <Text style={styles.text}>¿No tienes una cuenta?</Text>
-          <MiLink to="/register" >      Regístrate</MiLink>
-        </View>
-      </MiBox>
-    </ImageBackground >
+            onPress={() => {
+              const isUserValid = handleUser(user);
+              const isPasswordValid = handlePassword(password);
+              if (isUserValid && isPasswordValid) {
+                const usuarioValido = usuarios.find(
+                  u => u.user === user && u.password === password
+                );
+
+                if (usuarioValido) {
+                  setParams({ user: user, isLogged: true });
+
+                  router.push("/shop"); // Llama a la función de navegación
+                } else {
+                  console.log("Error en login");
+                  alert("Usuario y/o contraseña incorrectos");
+                }
+              };
+
+            }}
+          />
+          <View style={{
+            flexDirection: Platform.OS === "android" ? "column" : "row",
+
+          }}>
+
+            <Text style={styles.text}>¿No tienes una cuenta?</Text>
+            <MiLink to="/register" >      Regístrate</MiLink>
+          </View>
+        </MiBox>
+
+      </ImageBackground >
+    </SafeAreaView>
 
   );
 };
@@ -152,10 +161,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-text:{
-  fontSize: Platform.OS == 'android' ? 18:24,
-  fontFamily: "MiFuente",
-} ,
+  text: {
+    fontSize: Platform.OS == 'android' ? 18 : 24,
+    fontFamily: "MiFuente",
+  },
 
   errorText: {
     color: 'red',

@@ -11,15 +11,18 @@ import MiSafeArea from '../components/MiSafeArea';
 import { setParams } from 'expo-router/build/global-state/routing';
 
 const Shop = () => {
-   
+
     const router = useRouter();
     const { params, setParams } = useParams();
     const localParams = useLocalSearchParams();
-    
+
 
     const [data, setData] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [initialSearchDone, setInitialSearchDone] = useState(false);
+    const icon = params.user
+        ? require('../assets/login.png') // icono para usuario logueado
+        : require('../assets/sesion.png');   // icono por defecto (no logueado)
     const logOut = () => {
         setParams(prev => ({
             ...prev,
@@ -50,36 +53,51 @@ const Shop = () => {
     }, [data, localParams, params]);
 
     // función que MiTopBar llamará
+    const buscar = (query) => {
+        if (!query) {
+            setFiltered(data);
+            return;
+        }
 
+        const texto = query.toLowerCase();
+
+        const resultados = data.filter(item =>
+            item.title.toLowerCase().includes(texto)
+        );
+
+        setFiltered(resultados);
+    };
 
     return (
-        <ImageBackground
-            source={require("../assets/fondoRegister.jpg")}
-            style={styles.background}
-        >
-            <MiTopBar
+        <SafeAreaView style={{ flex: 1 }}>
+            <ImageBackground
+                source={require("../assets/fondoRegister.jpg")}
+                style={styles.background}
+            >
+                <MiTopBar
+                    rightIcon={icon}
+                    linkText={params.user ? `CERRAR SESION ${params.user}` : `INICIAR SESIÓN`}
+                    linkTo="/"
+                    onPress={() => {
+                        if (params.user) {
+                            logOut();       // ✔️ se ejecuta correctamente
+                        } else {
+                            router.push("/"); // ✔️ vuelve al inicio
+                        }
+                    }}
 
-                linkText={params.user ? `CERRAR SESION ${params.user}` : `INICIAR SESIÓN`}
-                linkTo="/"
-                onPress={() => {
-                    if (params.user) {
-                        logOut();       // ✔️ se ejecuta correctamente
-                    } else {
-                        router.push("/"); // ✔️ vuelve al inicio
-                    }
-                }}
 
 
 
+                    onSearch={buscar}   // ⬅️ SHOP recibe búsqueda aquí
+                />
 
-                onSearch={buscar}   // ⬅️ SHOP recibe búsqueda aquí
-            />
+                <View style={styles.content}>
+                    <MiSafeArea testID="ActivityIndicator" cards={filtered} />   {/* ⬅️ Shop controla qué mostrar */}
+                </View>
 
-            <View style={styles.content}>
-                <MiSafeArea testID="ActivityIndicator" cards={filtered} />   {/* ⬅️ Shop controla qué mostrar */}
-            </View>
-
-        </ImageBackground>
+            </ImageBackground>
+        </SafeAreaView>
     );
 };
 const styles = StyleSheet.create({

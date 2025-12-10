@@ -6,6 +6,7 @@ import TextyTextInput from '../components/TextyTextInput'; // ¡Importa tu nuevo
 import MiTopBar from '../components/MiTopBar';
 import MiBoton from '../components/MiBoton';
 import MiBox from '../components/MiBox';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Register = () => {
@@ -203,7 +204,7 @@ const Register = () => {
 
 
   return (
-    <View
+    <SafeAreaView
       style={styles.background}
 
     >
@@ -300,7 +301,7 @@ const Register = () => {
           />
         </MiBox >
       </View>
-    </View>
+    </SafeAreaView>
 
   );
 };

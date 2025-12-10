@@ -1,14 +1,14 @@
 import { View, Image, TextInput, Platform, TouchableOpacity, StyleSheet, Modal, Text, Button } from "react-native";
 import MiLink from "./MiLink";
 import MiTouchable from "./MiTouchable";
-import { useRouter,usePathname } from "expo-router";
+import { useRouter, usePathname } from "expo-router";
 import { useState, useEffect } from "react";
 import { useParams } from '../components/ParamsProvider';
 import { useCart } from "../components/CartContext";
 
 
 
-const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { } }) => {
+const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { }, rightIcon }) => {
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
@@ -43,7 +43,7 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { } }) => {
 
         />
       </TouchableOpacity>
-
+     
 
 
       {/* Icono derecho */}
@@ -68,10 +68,7 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { } }) => {
       </Modal>
       {Platform.OS === 'android' ? (
         <TouchableOpacity onPress={onPress}>
-          <Image
-            source={require('../assets/sesion.png')}
-            style={styles.icon}
-          />
+          <Image source={rightIcon || require('../assets/sesion.png')} style={styles.icon} />
         </TouchableOpacity>
       ) : Platform.OS === 'web' ? (
         <MiLink to="/" onPress={onPress}>

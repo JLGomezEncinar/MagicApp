@@ -1,19 +1,29 @@
 import { Link } from "expo-router";
 import { Text, StyleSheet, Platform } from "react-native";
 
-export default function MiLink({ to, children, style }) {
+export default function MiLink({ to, children, style, onPress }) {
   return (
-    <Link href={to}
-      onClick={(e) => {
+    <Link
+      href={to}
+      onPress={(e) => {        // <-- evita navegación también aquí
         if (onPress) {
-          e.preventDefault();   // evita navegación automática
+          e.preventDefault();
           onPress();
         }
-      }} style={[styles.link, style]}>
+      }}
+      onClick={(e) => {        // <-- y también en click (por compatibilidad)
+        if (onPress) {
+          e.preventDefault();
+          onPress();
+        }
+      }}
+      style={[styles.link, style]}
+    >
       <Text style={styles.text}>{children}</Text>
     </Link>
   );
 }
+
 
 const styles = StyleSheet.create({
   text: {

@@ -1,33 +1,46 @@
 import React from 'react';
-import { TextInput, StyleSheet, View, Text, Platform } from 'react-native';
+import { TextInput, StyleSheet, View, Text, Platform, useWindowDimensions } from 'react-native';
 
 const TextyTextInput = ({
   value,
-  onChangeText,  
+  onChangeText,
   keyboardType = 'default',
   secureTextEntry = false,
-  // Podemos añadir más props personalizadas o de estilo aquí
   label, // Etiqueta opcional
   error, // Mensaje de error opcional
   style,
   onBlur
 }) => {
+
+  const { width } = useWindowDimensions();
+  const isMobile = width < 768; // todo dispositivo <768px se considera móvil
+
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isMobile ? styles.column : styles.row]}>
       {/* Etiqueta (Label) */}
-      {label && <Text style={styles.label}>{label}</Text>}
-      
+      {label && (
+        <Text
+          style={[
+            styles.label,
+            !isMobile && styles.labelRight
+          ]}
+        >
+          {label}
+        </Text>
+      )}
+
       {/* TextInput principal */}
       <TextInput
-        style={[styles.input, style, error && styles.inputError]} // Aplica estilos y sobrescribe con 'style'
+        style={[styles.input, style, error && styles.inputError]}
         value={value}
-        onChangeText={onChangeText}        
+        onChangeText={onChangeText}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
         onBlur={onBlur}
         testID="input"
       />
-      
+
       {/* Mensaje de Error */}
       {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
@@ -36,16 +49,28 @@ const TextyTextInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: Platform.OS === 'android' ? 'column' : 'row',
-    width: '50%',
     marginVertical: 10,
+    alignItems: 'center', // centra verticalmente en web
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  column: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   label: {
-    fontSize: Platform.OS === 'android' ? 18 : 24,
-    marginBottom: 5,
+    fontSize: Platform.OS === 'web' ? 24: 18,
     fontWeight: 'bold',
     color: '#333',
-    fontFamily : 'MiFuente',
+    fontFamily: 'MiFuente',
+    marginBottom: 5,
+  },
+  labelRight: {
+    width: 150,         // ancho fijo para alinear labels en web
+    textAlign: 'right', // alineado a la derecha
+    marginRight: 10,    // espacio entre label e input
+    marginBottom: 0,
   },
   input: {
     height: 50,
@@ -55,9 +80,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#fff',
     fontSize: 16,
+    width: 150,
+    
   },
   inputError: {
-    borderColor: 'red', // Estilo si hay un error
+    borderColor: 'red',
     borderWidth: 2,
   },
   errorText: {
