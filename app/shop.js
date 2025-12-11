@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList, ActivityIndicator } from 'react-native';
-import { View, Button, StyleSheet, Alert, ImageBackground } from 'react-native';
+import  { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet, ImageBackground, useWindowDimensions } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useParams } from '../components/ParamsProvider';
-import MiLink from '../components/MiLink';
 import MiTopBar from '../components/MiTopBar';
-import ImageCard from '../components/ImageCard';
 import MiSafeArea from '../components/MiSafeArea';
-import { setParams } from 'expo-router/build/global-state/routing';
+
 
 const Shop = () => {
 
@@ -16,7 +13,9 @@ const Shop = () => {
     const { params, setParams } = useParams();
     const localParams = useLocalSearchParams();
 
+    const { width } = useWindowDimensions(); // Hook para obtener dimensiones
 
+    // Opcional: Lógica para determinar si mostrar algo diferente en pantalla grande
     const [data, setData] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [initialSearchDone, setInitialSearchDone] = useState(false);
@@ -113,8 +112,7 @@ const styles = StyleSheet.create({
     },
     background: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+
         height: '100%',
         width: '100%',
     },

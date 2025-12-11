@@ -1,62 +1,52 @@
-// ImageCard.test.js
-import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { Alert, Platform } from 'react-native';
-import ImageCard from '../components/ImageCard';
-import { CartProvider, useCart } from '../components/CartContext';
+import { render } from '@testing-library/react-native';
+import ImageCard from '../components/ImageCard'; // Asegúrate de que la ruta sea correcta
 
-// Mock del contexto del carrito
-jest.mock('../components/CartContext', () => ({
-  useCart: jest.fn(),
-}));
+// ----------------------------------------------------
+// 1. Mocks de dependencias
+// ----------------------------------------------------
 
-// Mock de Platform
-jest.mock('react-native/Libraries/Utilities/Platform', () => ({
-  OS: 'ios',
-  select: jest.fn(),
-}));
-
-// Mock de Alert
-jest.mock('react-native/Libraries/Alert/Alert', () => ({
-  alert: jest.fn(),
-}));
-
-// Mock de window.confirm para web
-const mockConfirm = jest.fn();
-Object.defineProperty(global, 'window', {
-  value: {
-    confirm: mockConfirm,
-  },
-  writable: true,
+// Mock para useWindowDimensions
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+  RN.useWindowDimensions = () => ({ width: 400, height: 800 }); // Valor fijo para pruebas
+  return RN;
 });
 
-describe('ImageCard Component', () => {
-  const mockAddToCart = jest.fn();
-  
-  beforeEach(() => {
-    jest.clearAllMocks();
-    useCart.mockReturnValue({ addToCart: mockAddToCart });
-  });
+// Mock para el hook useCart
+jest.mock('../components/CartContext', () => ({
+  useCart: () => ({
+    addToCart: jest.fn(),
+  }),
+}));
 
-  const defaultProps = {
-    image: 'https://example.com/image.jpg',
-    title: 'Producto Test',
-    description: 'Descripción del producto',
-    backgroundColor: '#FFFFFF',
+// ----------------------------------------------------
+// 2. El Test Básico
+// ----------------------------------------------------
+
+describe('ImageCard', () => {
+  // Define un conjunto básico de props
+  const mockProps = {
+    image: 'http://test.com/img.jpg',
+    title: 'Tarjeta de Prueba', // Este es el valor que vamos a buscar
+    description: 'Descripción de prueba',
+    backgroundColor: '#fff',
     onPress: jest.fn(),
   };
 
-  const renderComponent = (props = {}) => {
-    return render(<ImageCard {...defaultProps} {...props} />);
-  };
+  test('debe mostrar el título de la tarjeta correctamente', () => {
+    // Renderiza el componente con las props
+    const { getByText } = render(<ImageCard {...mockProps} />);
 
- 
+    // Usa getByText para encontrar el elemento de texto que contiene el título
+    // Si el texto se encuentra, el test pasa. Si no, falla.
+    const titleElement = getByText('Tarjeta de Prueba');
 
-
-
-  test('debería mostrar el título correctamente', () => {
-    const { getByText } = renderComponent({ title: 'Nuevo Producto' });
+    // Afirmación: verifica que el elemento existe
+    expect(titleElement).toBeDefined();
     
-    expect(getByText('Nuevo Producto')).toBeTruthy();
+    // Afirmación adicional: verifica que el texto es exactamente lo que esperábamos
+    expect(titleElement.props.children).toBe('Tarjeta de Prueba');
   });
+  
+  // Opcional: Podrías añadir tests para el cálculo de cardWidth, el onPress, etc.
 });

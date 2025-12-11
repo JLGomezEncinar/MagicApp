@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from "react";
-
+// Creamos el contexto
 const CartContext = createContext();
-
+// Función que nos permite ir añadiendo cartas al carrito
 export function CartProvider({ children }) {
   const [cart, setCart] = useState({}); 
   

@@ -4,7 +4,7 @@ import MiBox from "../components/MiBox";
 import { Text } from "react-native";
 
 describe("MiBox", () => {
-  it("renderiza correctamente los hijos", () => {
+  test("renderiza correctamente los hijos", () => {
     const { getByText } = render(
       <MiBox>
         <Text>Contenido interno</Text>

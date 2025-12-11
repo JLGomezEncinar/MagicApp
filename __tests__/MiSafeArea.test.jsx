@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, screen } from '@testing-library/react-native';
 // Importa el componente a probar
 import MiSafeArea from '../components/MiSafeArea';
@@ -8,10 +8,6 @@ import MiSafeArea from '../components/MiSafeArea';
 // pero mockear componentes específicos o de terceros como ImageCard ayuda a aislar la prueba.
 
 // 1. Datos de prueba
-const mockCards = [
-  { id: 1, title: 'Card 1', image: 'uri1', description: 'Desc 1', backgroundColor: 'red' },
-  { id: 2, title: 'Card 2', image: 'uri2', description: 'Desc 2', backgroundColor: 'blue' },
-];
 
 describe('MiSafeArea', () => {
 
