@@ -9,10 +9,10 @@ jest.mock("expo-router", () => ({
     push: jest.fn(),
   }),
 }));
-
+// Definimos los props del botón
 describe("MiBoton", () => {
   const defaultProps = {
-    title: "Probando",
+    title: "Probando", //Buscaremos el título
     onPress: jest.fn(),
     backgroundColor: "#123456",
     textColor: "#FFF000",
@@ -26,9 +26,9 @@ describe("MiBoton", () => {
   test("ejecuta onPress al presionar", () => {
     const { getByText } = render(<MiBoton {...defaultProps} />);
     const button = getByText("Probando");
-
+// Simulamos que apretamos el botón
     fireEvent.press(button);
-
+// Comprobamos que el botón indicado se ha pulsado una vez
     expect(defaultProps.onPress).toHaveBeenCalledTimes(1);
   });
 

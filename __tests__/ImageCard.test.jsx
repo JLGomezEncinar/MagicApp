@@ -1,14 +1,12 @@
 import { render } from '@testing-library/react-native';
-import ImageCard from '../components/ImageCard'; // Asegúrate de que la ruta sea correcta
+import ImageCard from '../components/ImageCard'; 
 
-// ----------------------------------------------------
-// 1. Mocks de dependencias
-// ----------------------------------------------------
+
 
 // Mock para useWindowDimensions
 jest.mock('react-native', () => {
   const RN = jest.requireActual('react-native');
-  RN.useWindowDimensions = () => ({ width: 400, height: 800 }); // Valor fijo para pruebas
+  RN.useWindowDimensions = () => ({ width: 400, height: 800 }); // Valor fijo para pruebas necesario para el test
   return RN;
 });
 
@@ -19,9 +17,6 @@ jest.mock('../components/CartContext', () => ({
   }),
 }));
 
-// ----------------------------------------------------
-// 2. El Test Básico
-// ----------------------------------------------------
 
 describe('ImageCard', () => {
   // Define un conjunto básico de props
@@ -48,5 +43,5 @@ describe('ImageCard', () => {
     expect(titleElement.props.children).toBe('Tarjeta de Prueba');
   });
   
-  // Opcional: Podrías añadir tests para el cálculo de cardWidth, el onPress, etc.
+  
 });

@@ -6,8 +6,8 @@ const TextyTextInput = ({
   onChangeText,
   keyboardType = 'default',
   secureTextEntry = false,
-  label, // Etiqueta opcional
-  error, // Mensaje de error opcional
+  label, 
+  error, 
   style,
   onBlur
 }) => {
@@ -46,7 +46,7 @@ const TextyTextInput = ({
     </View>
   );
 };
-
+// Parámetros de los estilos
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,

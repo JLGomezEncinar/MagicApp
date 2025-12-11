@@ -10,7 +10,7 @@ describe("TextyTextInput", () => {
         value=""
         onChangeText={mockOnChangeText}
         label="Nombre"
-        testID="input" // Agregamos testID para seleccionarlo
+        testID="input" 
       />
     );
 

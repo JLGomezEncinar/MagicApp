@@ -70,7 +70,7 @@ const Index = () => {
         resizeMode='cover'
 
       >
-        // Ponemos un overlay para oscurecer el fondo
+        {/* Ponemos un overlay para oscurecer el fondo */}
         <View style={styles.overlay} />
         <MiBox
           customStyles={{

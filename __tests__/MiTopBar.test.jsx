@@ -1,9 +1,7 @@
 import { render, fireEvent } from '@testing-library/react-native';
-import MiTopBar from '../components/MiTopBar'; // Asegúrate de que la ruta sea correcta
+import MiTopBar from '../components/MiTopBar'; 
 
-// ----------------------------------------------------
-// 1. Mocks de dependencias externas
-// ----------------------------------------------------
+
 
 // Mock para los hooks de expo-router
 jest.mock('expo-router', () => ({
@@ -22,14 +20,12 @@ jest.mock('../components/CartContext', () => ({
 }));
 
 // Mock para MiLink y MiTouchable (componentes hijos)
-// Esto evita errores si Jest no puede resolver su importación
+
 jest.mock('../components/MiLink', () => 'MiLink');
 jest.mock('../components/MiTouchable', () => 'MiTouchable');
 
 
-// ----------------------------------------------------
-// 2. El Test Básico (Funcionalidad de Búsqueda)
-// ----------------------------------------------------
+
 
 describe('MiTopBar', () => {
   
@@ -59,7 +55,7 @@ describe('MiTopBar', () => {
     // 5. Simula la pulsación del botón de búsqueda
     fireEvent.press(searchButton);
 
-    // 6. Afirma que la función mockOnSearch fue llamada con el texto esperado
+    // 6. Afirma que la función mockOnSearch fue llamada con el texto esperado una vez
     expect(mockOnSearch).toHaveBeenCalledWith(searchText);
     expect(mockOnSearch).toHaveBeenCalledTimes(1);
   });

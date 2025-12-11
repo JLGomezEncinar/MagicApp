@@ -5,13 +5,13 @@ export default function MiLink({ to, children, style, onPress }) {
   return (
     <Link
       href={to}
-      onPress={(e) => {        // <-- evita navegación también aquí
+      onPress={(e) => {        // <-- evita navegación también aquí (se utiliza para el logout)
         if (onPress) {
           e.preventDefault();
           onPress();
         }
       }}
-      onClick={(e) => {        // <-- y también en click (por compatibilidad)
+      onClick={(e) => {        // <-- y también en click (también para evitar conflictos con el logout)
         if (onPress) {
           e.preventDefault();
           onPress();

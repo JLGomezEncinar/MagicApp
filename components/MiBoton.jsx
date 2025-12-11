@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
-// ... en tu componente
+
 const router = useRouter();
 const MiBoton = ({
   title = "Botón",
@@ -28,7 +28,7 @@ const MiBoton = ({
     </TouchableOpacity>
   );
 };
-
+// Parámetros de los estilos
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 12,

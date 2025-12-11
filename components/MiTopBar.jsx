@@ -33,7 +33,7 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { }, rightIcon }
 
 
 
-      {/* Icono izquierdo */}
+      {/* Icono de búsqueda */}
       <TouchableOpacity
         onPress={buscar}
         testID="search-button">
@@ -43,15 +43,16 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { }, rightIcon }
 
         />
       </TouchableOpacity>
-     
 
 
-      {/* Icono derecho */}
+
+      {/* Icono de la tienda */}
       <TouchableOpacity onPress={() => setOpen(true)}>
         <Image
           source={require("../assets/shop.png")}
           style={styles.icon}
         />
+        {/*Modal que nos muestra los elementos que tenemos en el carrito*/}
       </TouchableOpacity>
       <Modal visible={open} transparent animationType="slide">
         <View style={styles.modal}>
@@ -62,10 +63,11 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { }, rightIcon }
               {item}: {cart[item]} unidades
             </Text>
           ))}
-
+          {/* Al pulsar cerrar el modal desaparece*/}
           <Button title="Cerrar" onPress={() => setOpen(false)} />
         </View>
       </Modal>
+      {/* Mostramos una cosa en web y otra en móvil*/}
       {Platform.OS === 'android' ? (
         <TouchableOpacity onPress={onPress}>
           <Image source={rightIcon || require('../assets/sesion.png')} style={styles.icon} />
@@ -79,7 +81,7 @@ const MiTopBar = ({ linkText, linkTo, onPress, onSearch = () => { }, rightIcon }
     </View>
   );
 };
-
+// Parámetros de los estilos
 const styles = StyleSheet.create({
   container: {
     width: "100%",

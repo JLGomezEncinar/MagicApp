@@ -7,24 +7,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function MiSafeArea({ cards }) {
   const { width } = useWindowDimensions();
 
-  // 1. Determinar el modo de visualización:
-  // Por ejemplo, usar horizontal para anchos mayores a 768px (tabletas/web)
+ // Cambiamos de horizontal a vertical en función del ancho de la pantalla
   const isHorizontalMode = width >= 768;
-  // 1. Renderizar cada tarjeta
+  //  Renderizar cada tarjeta
   const renderItem = ({ item }) => (
-    // Los estilos de ImageCard ahora deberían enfocarse en tener un ancho fijo (o basado en la pantalla)
-    // para que se vea bien en el carrusel horizontal.
+    
     <ImageCard
       image={item.image}
       title={item.title}
       description={item.description}
       backgroundColor={item.backgroundColor}
       onPress={() => alert('Card seleccionada ' + item.title)}
-    // Ya no es necesario pasar numColumns ni screenWidth para la responsividad de cuadrícula
+  
     />
   );
 
-  // --- Lógica de Carga y Sin Resultados (se mantiene igual) ---
+  // Si no hay tarjetas cargadas nos sale el activity indicator
 
   if (!cards) {
     return (
@@ -33,7 +31,7 @@ export default function MiSafeArea({ cards }) {
       </SafeAreaView>
     );
   }
-
+// Si la búsqueda no devuelve resultados nos aparece un mensaje
   if (cards.length === 0) {
     return (
       <SafeAreaView style={styles.centerContainer}>
@@ -46,18 +44,17 @@ export default function MiSafeArea({ cards }) {
 
   return (
     <SafeAreaView style={styles.listContainer}>
-      {/* 2. El View envuelve el FlatList para gestionar la altura */}
+      {/*El View envuelve el FlatList para gestionar la altura */}
       <View style={styles.horizontalWrapper}>
         <FlatList
           data={cards}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderItem}
-          // 3. Clave para el scroll horizontal:
+         
           horizontal={isHorizontalMode}
-          // 4. Eliminar numColumns
+         
 
-          // Opcional: Para que no muestre la barra de scroll horizontal
-          showsHorizontalScrollIndicator={false}
+          
 
           contentContainerStyle={styles.listContentHorizontal}
         />
@@ -65,7 +62,7 @@ export default function MiSafeArea({ cards }) {
     </SafeAreaView>
   );
 }
-
+// Parámetros de los estilos
 const styles = StyleSheet.create({
   centerContainer: {
     flex: 1,
@@ -79,18 +76,14 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
   },
-  // Estilo que define el alto que ocupará el carrusel (ej: solo un tercio de la pantalla)
+  // Estilo que define el alto que ocupará el carrusel
   horizontalWrapper: {
-    // Ejemplo: Fija una altura si quieres que el carrusel solo ocupe una parte
-    // O usa un porcentaje, ej: height: '30%'
-    // Si quieres que ocupe todo el espacio vertical disponible, usa flex: 1
+    
     flex: 1,
   },
   listContentHorizontal: {
     alignItems: 'center',
     paddingHorizontal: 10,
-    // Alineación vertical de los items en el carrusel
-    // flexGrow: 1, // Esto es útil si quieres centrar los items si no llenan la pantalla
-    // justifyContent: 'center', // Útil si usas flexGrow: 1
+    
   }
 });

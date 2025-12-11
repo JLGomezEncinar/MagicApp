@@ -30,7 +30,7 @@ export default function ImageCard({
   // La altura se mantiene proporcional al nuevo ancho (proporción original ≈ 0.96:1)
   const cardHeight = cardWidth * 0.96;
 
-
+// Estilos de la tarjeta e imágenes
   const dynamicStyles = StyleSheet.create({
     dynamicCard: {
       width: cardWidth,
@@ -82,7 +82,7 @@ export default function ImageCard({
     </View>
   );
 }
-
+// Parámetros de los estilos
 const styles = StyleSheet.create({
   card: {
     
